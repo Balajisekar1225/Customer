@@ -1,8 +1,13 @@
 package com.myapp.customer;
 
+import java.util.List;
+
+import org.apache.log4j.PropertyConfigurator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 ///import org.springframework.web.bind.annotation.RequestBody;
+
+
 
 @Repository
 public class CustomerDao {
@@ -28,4 +33,9 @@ public class CustomerDao {
 		 custRepo.save(temp);
 		 return "Update Successfully";
 }
+	public List<Customer> getCustomers(){
+		PropertyConfigurator.configure("log.properties");
+		//log.info(custRepo.findAll());
+		return custRepo.findAll();
+	}
 }

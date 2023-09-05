@@ -47,5 +47,10 @@ public class Customer {
 	public void setIfscCode(String ifscCode) {
 		this.ifscCode = ifscCode;
 	}
+	@Override
+	public String toString() {
+		return "Customer [id=" + id + ", name=" + name + ", accountNumber=" + accountNumber + ", branch=" + branch
+				+ ", ifscCode=" + ifscCode + "]";
+	}
 
 }

@@ -1,5 +1,9 @@
 package com.myapp.customer;
 
+import java.util.List;
+
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 //import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
@@ -10,13 +14,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 ///import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.client.RestTemplate;
+
 @RestController
 @RequestMapping (value="/admin")
 public class CustomerController {
+	static Logger log = Logger.getLogger(CustomerController.class);
 	@Autowired
 	CustomerService custser;
 	RestTemplate rest = new RestTemplate();
@@ -29,12 +34,20 @@ public class CustomerController {
 		return custser.addCustomerifsc(c);
 }
 	@GetMapping (value="/getid/{id}")
-	public Customer getCustomerId(@PathVariable int id) {
-		return custser.getCustomerId(id);
-	}
+	//public Customer getCustomerId(@PathVariable int id) {
+	//	PropertyConfigurator.configure("log.properties");
+		//return custser.getCustomerId(id);
+//	}
 	@PutMapping(value="/updateName/{id}")
 	public String updateName(@RequestBody Customer e ,@PathVariable int id) {
 		return custser.updateName(e,id);
+	}
+	@GetMapping(value="/getList")
+	public List<Customer> getCustomers() {
+		PropertyConfigurator.configure("log.properties");
+		log.info(custser.getCustomers());
+		return custser.getCustomers();
+	
 	}
 	
 
